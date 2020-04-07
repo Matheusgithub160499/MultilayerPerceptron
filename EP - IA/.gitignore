@@ -1,0 +1,11 @@
+/bin/
+/.classpath
+/.project
+/MultilayerPerceptron/
+/opencsv-5.1.jar
+/org.apache.commons.lang3_3.1.0.v201403281430.jar
+/caracteres-limpo.csv
+/caracteres-ruido.csv
+/problemAND.csv
+/problemOR.csv
+/problemXOR.csv
