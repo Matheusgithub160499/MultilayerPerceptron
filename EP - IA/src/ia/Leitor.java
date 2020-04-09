@@ -73,10 +73,6 @@ public class Leitor {
 			saidasEsperadas[i] = Double.valueOf(inputs.get(i)[inputs.get(i).length-1]);
 		}
 		
-		for(int i=0; i<saidasEsperadas.length; i++) {
-			System.out.println("Saidas: " + saidasEsperadas[i]);
-		}
-		
 		return saidasEsperadas;
 	}
 	
