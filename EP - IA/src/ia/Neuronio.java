@@ -48,7 +48,7 @@ public class Neuronio {
 	}
 	
 	private void inicializaPesos(int qtdPesos) {
-		
+		peso = new double[qtdPesos];
 		for(int i=0; i < qtdPesos; i++) {
 			this.peso[i] = getRandomRange(0.1, 1); 			
 		}
@@ -63,9 +63,13 @@ public class Neuronio {
 	
 	public String toString() {
 		String retornaValor = "";
-		if(tipoNeuronio == RedeNeural.TipoNeuronio.I) retornaValor = "(" + tipoNeuronio + ": " + String.format("%.2f", output) + ")";
-		else retornaValor = "(" + tipoNeuronio + ", " + String.format("%.2f", peso[0]) + ", " + String.format("%.2f", peso[1]) +
-							", " + String.format("%.2f", entrada) + ", " + String.format("%.5f", output) + ")";
+		if(tipoNeuronio == RedeNeural.TipoNeuronio.I) 
+			retornaValor = "(" + tipoNeuronio + ": " + String.format("%.2f", output) + ")";
+		else 
+			retornaValor = "(" + tipoNeuronio + ", " + 
+							String.format("%.2f", peso[0]) + ", " + String.format("%.2f", peso[1]) + ", " + 
+							String.format("%.2f", entrada) + ", " + 
+							String.format("%.5f", output) + ")";
 		
 		return retornaValor;
 	}

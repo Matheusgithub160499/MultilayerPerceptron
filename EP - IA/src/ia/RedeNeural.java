@@ -1,20 +1,16 @@
 package ia;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public class RedeNeural {
 	
 	static enum TipoNeuronio {I, H, O};
 	private static double taxaAprendizado;
-	private static int inputNeuronio;
-	private static int hiddenNeuronio;
+	public static int inputNeuronio;
+	public static int hiddenNeuronio;
 	private static double[] bias = new double[2];
 	private static Neuronio[] neuronios;
-	public static int epocas;
+	public int epocas;
 	public static double[] saidasEsperadas = {0, 0, 0, 1};
 	public static double[][] entradas = {{-1, -1},
 										{-1, 1},
@@ -29,14 +25,14 @@ public class RedeNeural {
 		neuronios[INPUT_NEURONIO + HIDDEN_NEURONIO] = new Neuronio(TipoNeuronio.O);
 	}
 	*/
-	private static void inicializaVariaveis() {
+	public void inicializaVariaveis() {
 		bias[0] = getRandomNoIntervalo(0.0, 1.0);
 		bias[1] = getRandomNoIntervalo(0.0, 1.0);
 		taxaAprendizado = getRandomNoIntervalo(0.1, 1.0);
 		epocas = 1000;
 	}
 	
-	private static void inicializaNeuronios(int qtdInput, int qtdHidden, int qtdOutuput) {
+	public void inicializaNeuronios(int qtdInput, int qtdHidden, int qtdOutuput) {
 		neuronios = new Neuronio[qtdInput + qtdHidden + qtdOutuput];
 		inputNeuronio = qtdInput;
 		hiddenNeuronio = qtdHidden;
@@ -67,8 +63,10 @@ public class RedeNeural {
 		   return x;
 	}
 	
-	public static RedeNeural forwardprop (double input[]) {
+	public RedeNeural forwardprop (double input[]) {
 		double somaPesos = 0;
+		//double somaEntrada = 0;
+		
 		
 		for (int i=0; i<neuronios.length; i++) {
 			
@@ -97,8 +95,8 @@ public class RedeNeural {
 	public RedeNeural backpropError (double valEsperado) {
 		neuronios[4].setError((valEsperado - neuronios[4].getOutput()) * neuronios[4].calculaDerivada());
 		neuronios[4].setEntrada(neuronios[4].getEntrada() + taxaAprendizado * neuronios[4].getError());
-		neuronios[4].getPeso()[0] = neuronios[4].getPeso()[0] + taxaAprendizado * neuronios[4].getError() * neuronios[0].getOutput();
-		neuronios[4].getPeso()[1] = neuronios[4].getPeso()[1] + taxaAprendizado * neuronios[4].getError() * neuronios[1].getOutput();
+		neuronios[4].getPeso()[0] = neuronios[4].getPeso()[0] + taxaAprendizado * neuronios[4].getError() * neuronios[2].getOutput();
+		neuronios[4].getPeso()[1] = neuronios[4].getPeso()[1] + taxaAprendizado * neuronios[4].getError() * neuronios[3].getOutput();
 		
 		neuronios[3].setError(neuronios[4].getPeso()[1] * neuronios[4].getError() * neuronios[3].calculaDerivada());
 		neuronios[3].setEntrada(neuronios[3].getEntrada() + taxaAprendizado * neuronios[3].getError());
@@ -129,7 +127,7 @@ public class RedeNeural {
 		*/
 															
 	}
-	
+	/*
 	public static void main(String[] args) {
 
 		inicializaVariaveis();
@@ -178,6 +176,6 @@ public class RedeNeural {
 			}
 		}
 		System.exit(0);
-	}
+	}*/
 
 }
