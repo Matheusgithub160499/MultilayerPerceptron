@@ -50,7 +50,7 @@ public class Leitor {
 	}
 	
 	
-	public static ArrayList<double[]> leEntrada(){
+	public ArrayList<double[]> leEntrada(){
 		
 		inputs.get(0)[0] = inputs.get(0)[0].substring(1);
 		ArrayList<double[]> entradas = new ArrayList<double[]>();
@@ -65,7 +65,7 @@ public class Leitor {
 		return entradas;
 	}
 	
-	public static double[] leSaidaEsperada() {
+	public double[] leSaidaEsperada() {
 		
 		double[] saidasEsperadas = new double[inputs.size()];
 

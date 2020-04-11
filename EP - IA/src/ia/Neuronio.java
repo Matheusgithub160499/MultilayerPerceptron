@@ -77,6 +77,7 @@ public class Neuronio {
 	//Aplica a funcao de ativacao - Sigmoide
 	public void aplicaFuncaoAtivacao(double somaPesos) {
 		output = 1 / (1 + Math.exp(-1 * somaPesos));
+		setOutput(output);
 	}
 	
 	//Calcula a derivada da funcao de ativacao

@@ -4,22 +4,16 @@ import java.io.*;
 
 public class Driver {
 	
-	static int NUM_EPOCAS = 1000;
-	public static double[] saidasEsperadas = {0, 0, 0, 1};
-	public static double[][] entradas = {{-1, -1},
-										{-1, 1},
-										{1, -1},
-										{1, 1}};
 	
 	public static void printaResultado(double resultado[]) {
 		System.out.println("  Input 1    |    Input 2    |    Esperado    |    Resultado  ");
 		System.out.println("--------------------------------------------------------------");
-		for(int i=0; i < entradas.length; i++) {
-			for(int j=0; j < entradas[0].length; j++) {
-				System.out.print("     " + entradas[i][j] + "     |   ");
+		for(int i=0; i < RedeNeural.entradas.size(); i++) {
+			for(int j=0; j < RedeNeural.entradas.get(0).length; j++) {
+				System.out.print("     " + RedeNeural.entradas.get(i)[j] + "     |   ");
 				
 			}
-			System.out.print("  " + saidasEsperadas[i] + "       |  " + String.format("%.5f", resultado[i]) + "  \n");
+			System.out.print("  " + RedeNeural.saidasEsperadas[i] + "       |  " + String.format("%.5f", resultado[i]) + "  \n");
 		}
 	}
 	
@@ -27,7 +21,7 @@ public class Driver {
 		RedeNeural redeNeural = new RedeNeural();
 		
 		redeNeural.inicializaVariaveis();
-		redeNeural.inicializaNeuronios(entradas[0].length, entradas[0].length, 1);
+		redeNeural.inicializaNeuronios(RedeNeural.entradas.get(0).length, RedeNeural.entradas.get(0).length, 1);
 		
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		boolean flag = true;
@@ -42,8 +36,8 @@ public class Driver {
 				case "rodar":
 					double[] resultado = new double[] {0,0,0,0};
 					
-					for(int i=0; i < entradas.length; i++) {
-						resultado[i] = redeNeural.forwardprop(entradas[i])
+					for(int i=0; i < RedeNeural.entradas.size(); i++) {
+						resultado[i] = redeNeural.forwardprop(RedeNeural.entradas.get(i))
 									   .getNeuronios()[RedeNeural.inputNeuronio + RedeNeural.hiddenNeuronio]
 									   .getOutput();
 					};
@@ -54,8 +48,9 @@ public class Driver {
 					for(int i=0; i < redeNeural.epocas; i++) {
 						System.out.println("[Epoca " +i+"]");
 						System.out.println("[Tipo Neuronio, peso 1, peso 2, entrada, output]");
-						for(int j=0; j < entradas.length; j++) {
-							System.out.println(redeNeural.forwardprop(entradas[j]).backpropError(saidasEsperadas[j]));
+						for(int j=0; j < RedeNeural.entradas.size(); j++) {
+							System.out.println(redeNeural.forwardprop(RedeNeural.entradas.get(j))
+														 .backpropError(RedeNeural.saidasEsperadas[j]));
 						}
 					};
 					System.out.println("[Acabou o treino!]");
