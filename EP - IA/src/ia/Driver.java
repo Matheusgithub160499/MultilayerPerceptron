@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Driver {
 	
-	
+	/* Printa o resulta de acordo com os inputs */
 	public static void printaResultado(double resultado[]) {
 		System.out.println("  Input 1    |    Input 2    |    Esperado    |    Resultado  ");
 		System.out.println("--------------------------------------------------------------");
@@ -18,9 +18,10 @@ public class Driver {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RedeNeural redeNeural = new RedeNeural();
+		RedeNeural redeNeural = new RedeNeural();//Cria nova rede neural
 		
-		redeNeural.inicializaVariaveis();
+		redeNeural.inicializaVariaveis();//Inicializa taxa de Aprendizado, numero de epocas, inputs e entradas
+		//Inicializa os neuronios e cada camada da rede
 		redeNeural.inicializaNeuronios(RedeNeural.entradas.get(0).length, RedeNeural.entradas.get(0).length, 1);
 		
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -35,8 +36,9 @@ public class Driver {
 				
 				case "rodar":
 					double[] resultado = new double[] {0,0,0,0};
-					
+					//Para cada Array de input
 					for(int i=0; i < RedeNeural.entradas.size(); i++) {
+						//Aplica o fowardprop e captura a saida de cada input
 						resultado[i] = redeNeural.forwardprop(RedeNeural.entradas.get(i))
 									   .getNeuronios()[RedeNeural.inputNeuronio + RedeNeural.hiddenNeuronio]
 									   .getOutput();
@@ -46,9 +48,12 @@ public class Driver {
 					
 				case "treinar":
 					for(int i=0; i < redeNeural.epocas; i++) {
-						System.out.println("[Epoca " +i+"]");
+						System.out.println("[Epoca " + (i+1) +"]");//Epoca comeca em 1
+						//Padrao de print
 						System.out.println("[Tipo Neuronio, peso 1, peso 2, entrada, output]");
+						//Para cada Array de input
 						for(int j=0; j < RedeNeural.entradas.size(); j++) {
+							//Aplica o backpropagation em cada array de input a partir das saidas esperadas
 							System.out.println(redeNeural.forwardprop(RedeNeural.entradas.get(j))
 														 .backpropError(RedeNeural.saidasEsperadas[j]));
 						}
@@ -58,6 +63,7 @@ public class Driver {
 					
 				case "sair":
 					flag = false;
+					System.out.println("\nAdeus!");
 					break;	
 				}
 			} 
